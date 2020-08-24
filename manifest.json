@@ -9,8 +9,7 @@
         "48": "icons/border-48.png"
     },
     "permissions": [
-        "bookmarks",
-        "tabs"
+        "bookmarks"
     ],
     "browser_action": {
         "browser_style": true,
