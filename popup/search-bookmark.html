@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../scripts/vue.2.6.12.js"></script>
+    <title>search-bookmark</title>
+</head>
+<body>
+    <div class="wrap" id="wrap">
+        <div :class="css.input_div" id="input-div">
+            <input class="input-text" type="text" name="search" id="search-text" v-model="input_value">
+            <a :class="css.button" value="search" id="search-reset-btn" @click="clickBtn"> {{ btn_value }} </a>
+        </div>
+        <ul>
+            <li v-for="(item,index) of bookmarkArr">
+                {{ index }} - {{ item.title }} - {{ item.url }}
+            </li>
+        </ul>
+    </div>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        html,body,.wrap{
+            width: 200px;
+            height: 110px;
+            margin: 5px 0;
+        }
+        .inputDiv{
+            width: 200px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            transition: all .3s;
+        }
+        .inputDiv-default{
+            height: 100px;
+        }
+        .inputDiv-clicked{
+            height: 50px;
+            transform: translateY(-15px);
+        }
+        .input-text{
+            display: block;
+            width: 100px;
+            height: 20px;
+        }
+        .button{
+            display: block;
+            height: 20px;
+        }
+    </style>
+
+    <script async src="../scripts/popup.js"></script>
+</body>
+</html>
+
