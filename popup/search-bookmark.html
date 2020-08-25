@@ -7,52 +7,83 @@
     <title>search-bookmark</title>
     <style>
         *{
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-        html,body,.wrap{
+        html,body{
             width: 500px;
             height: 600px;
         }
-        .inputDiv{
+        body{
+            padding: 30px 20px;
+        }
+        .wrap{
             display: flex;
-            justify-content: space-around;
+            align-content: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        /* 输入框 + 搜索按钮 */
+        .input-div{
+            display: flex;
             align-items: center;
+            justify-content: center;
             transition: all .3s;
+            border: 1px solid #333;
+            width: 100%;
         }
-        .inputDiv-default{
-            height: 100px;
-        }
-        .inputDiv-clicked{
-            height: 50px;
-            transform: translateY(-15px);
-        }
-        .input-text{
+        .input-div>.input-text{
             display: block;
-            width: 100px;
-            height: 20px;
+            width: 100%;
+            flex: 7;
+            height: 30px;
+            line-height: 30px;
         }
-        .button{
+        .input-div>.search-button{
+            height: 30px;
+            line-height: 30px;
             display: block;
-            height: 20px;
+            width: 100%;
+            text-align: center;
+            flex: 3;
+            cursor: pointer;
         }
-        .ul{
-            list-style: decimal;
+        /* 显示区域 */
+        .search-result-ul{
+            display: block;
+            width: 100%;
+            height: 500px;
+            margin-top: 15px;
+            list-style: none;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
-        .ul>li{
-            width: 100vw;
+        .search-result-ul>li{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .search-result-ul>li>span{
+            display: inline-block;
+            width: 20px;
+            padding-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="wrap" id="wrap">
-        <div :class="css.input_div" id="input-div">
-            <input class="input-text" type="text" name="search" id="search-text" autofocus v-model="input_value">
-            <a :class="css.search_button" value="search" id="search-reset-btn" @click="clickBtn"> {{ btn_value }} </a>
+        <!-- 搜索输入 -->
+        <div class="input-div" id="input-div">
+            <input class="input-text" type="text" :placeholder="input_placeholder" name="search" id="search-text" autofocus v-model="input_value">
+            <a class="search-button" value="search" id="search-reset-btn" @click="clickBtn"> {{ btn_value }} </a>
         </div>
-        <ul class="ul">
-            <li v-for="(item,index) of bookmarkArr">
-                <a :href=" item.url" :title="item.title">
-                    {{ item.title }}
+        <!-- 搜索结果 -->
+        <ul class="search-result-ul">
+            <li v-for="(item,index) of search_result">
+                <span>{{index+1}}.</span>
+                <a :href="item.url" :title="item.title">
+                     {{ item.title }}
                 </a>
             </li>
         </ul>

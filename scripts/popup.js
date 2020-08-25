@@ -2,47 +2,29 @@
 new Vue({
     el: '#wrap',
     data:{
-        'btn_value': '搜索',
-        'input_value': '',
+        'btn_value': '搜索', // 搜索按钮文字
+        'input_value': '', // 搜索框输入值
+        'input_placeholder': '网址 | 书签名称 | 分类', // 搜索框placeholder值
         'bookmarkArr': [], // 所有书签
         'search_result': [], // 搜索结果
-        'search_cache': [], // 搜素缓存
-
-        // ===== css-start =====
-        'css':{
-            'input_div': 'inputDiv inputDiv-default',
-            'input_div_default': 'inputDiv inputDiv-default',
-            'input_div_clicked': 'inputDiv inputDiv-clicked',
-            'search_button': 'button',
-        },
-        // =====  css-end  =====
+        'search_cache': {}, // 搜索缓存
+        'search_history': [], // 搜索词历史
     },
     methods:{
         // 点击按钮
         async clickBtn(){
-            this.btn_value === '搜索'?this.clickSearch():this.clickReset();
-        },
-        // 按钮为搜索
-        async clickSearch(){
             // 更改页面状态
-            this.css.input_div = this.css.input_div_clicked;
-            this.btn_value = '重置';
+            this.search_result = [];
 
             // 搜索书签
             for(let o of this.bookmarkArr){
-                this.search_result = [];
                 // 添加符合要求的书签
                 if(
                     o.title.includes(this.input_value) ||
                     o.url.includes(this.input_value)
                 ) this.search_result.push(o);
             }
-        },
-        // 按钮为重置
-        clickReset(){
-            // 更改页面状态
-            this.css.input_div = this.css.input_div_default;
-            this.btn_value = '搜索';
+            console.log(this.search_result);
         },
         /**
          * 递归书签目录
