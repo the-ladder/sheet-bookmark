@@ -13,7 +13,7 @@ new Vue({
             'input_div': 'inputDiv inputDiv-default',
             'input_div_default': 'inputDiv inputDiv-default',
             'input_div_clicked': 'inputDiv inputDiv-clicked',
-            'button': 'button',
+            'search_button': 'button',
         },
         // =====  css-end  =====
     },

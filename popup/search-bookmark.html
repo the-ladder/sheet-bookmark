@@ -14,7 +14,6 @@
             height: 600px;
         }
         .inputDiv{
-            width: 200px;
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -36,17 +35,25 @@
             display: block;
             height: 20px;
         }
+        .ul{
+            list-style: decimal;
+        }
+        .ul>li{
+            width: 100vw;
+        }
     </style>
 </head>
 <body>
     <div class="wrap" id="wrap">
         <div :class="css.input_div" id="input-div">
             <input class="input-text" type="text" name="search" id="search-text" autofocus v-model="input_value">
-            <a :class="css.button" value="search" id="search-reset-btn" @click="clickBtn"> {{ btn_value }} </a>
+            <a :class="css.search_button" value="search" id="search-reset-btn" @click="clickBtn"> {{ btn_value }} </a>
         </div>
-        <ul>
+        <ul class="ul">
             <li v-for="(item,index) of bookmarkArr">
-                {{ index }} - {{ item.title }} - {{ item.url }}
+                <a :href=" item.url" :title="item.title">
+                    {{ item.title }}
+                </a>
             </li>
         </ul>
     </div>
