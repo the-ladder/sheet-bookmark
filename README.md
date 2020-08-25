@@ -1,4 +1,6 @@
 
+# SHEET-BOOKMARK
+
 ## 书签格式
 
 字段| 类型| 解释
@@ -12,3 +14,15 @@ dateAdded | number | 该节点创建的时间，表示为自 1970 年 1 月 1 �
 dateGroupModified | number | 该文件夹内容的上一次修改时间，表示为自 1970 年 1 月 1 日午夜至今所经过的毫秒数。
 unmodifiable | bookmarks.BookmarkTreeNodeUnmodifiable | 表示该节点不可修改的原因，"managed"表示该节点由系统管理员配置。如果该节点可以由用户和扩展程序修改（默认）则省略。
 children | array | bookmarks.BookmarkTreeNode. 该节点的所有子节点（已排序）。
+
+### 历史
+
+* **2020-08-24**
+  * 完成书签呈现
+* **2020-08-25**
+  * 完成书签搜索
+
+### 接下来
+
+* 存储本地书签
+* 书签分类
