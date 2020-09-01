@@ -1,14 +1,17 @@
 const inner = {};
 
-// 定时器
-inner.setTimeoutPromise = async (func,timerange) => {
+/**
+ * 定时器
+ * @param func {Function} 回调函数
+ * @param timeRange {Number} 间隔时间(ms)
+ */
+inner.setTimeoutPromise = async (func,timeRange) => {
     return new Promise((resolve,reject) => {
         try{
 
             setTimeout(() => {
-                func();
-                resolve();
-            },timerange);
+                resolve(func());
+            },timeRange);
 
         }catch(e){
             reject(e.message);
@@ -41,8 +44,8 @@ inner.bookmarkChildren = (bookmarks,obj) => {
     for(let o of bookmarks){
         // 书签对象
         for(let i in o){
-            if(i==='children' && o[i].length!==0) {
-                inner.bookmarkChildren(o[i],obj);
+            if(i==='children' && o['children'].length!==0) {
+                inner.bookmarkChildren(o['children'],obj);
             }else {
                 thisObj[i] = o[i];
             }
