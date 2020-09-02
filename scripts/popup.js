@@ -24,7 +24,6 @@ new Vue({
                     o.url.includes(this.input_value)
                 ) this.search_result.push(o);
             }
-            console.log(this.search_result);
         },
         /**
          * 递归书签目录
@@ -49,13 +48,18 @@ new Vue({
         },
         // 触发书签函数
         async toggleBookmark(){
+            let data = [];
             let obj = [];
             // 拿到所有书签
             let bookmarks = await browser.bookmarks.getTree();
             // 书签 根节点
             let rdata = this.bookmarkChildren(bookmarks,obj);
-            this.bookmarkArr = rdata;
-            return rdata;
+            for(let {dateAdded,id,index,parentId,title,type,url} of rdata) {
+                data.push({dateAdded, id, index, parentId, title, type, url})
+            }
+            this.bookmarkArr = data;
+
+            return data;
         },
         // 定时器
         setTimeoutPromise(func,timerange){

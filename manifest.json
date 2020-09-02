@@ -10,7 +10,8 @@
         "96": "icons/s-bm.svg"
     },
     "permissions": [
-        "bookmarks"
+        "bookmarks",
+        "storage"
     ],
     "browser_action": {
         "browser_style": true,

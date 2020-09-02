@@ -10,18 +10,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all .3s;
         }
         html,body{
-            width: 500px;
-            height: 600px;
-        }
-        body{
-            padding: 30px 20px;
+            width: 350px;
         }
         .wrap{
             display: flex;
             align-content: center;
-            width: 100%;
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px 0;
             flex-wrap: wrap;
         }
         /* 输入框 + 搜索按钮 */
@@ -29,7 +28,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all .3s;
+            margin: 5px 0;
             border: 1px solid #333;
             width: 100%;
         }
@@ -39,6 +38,7 @@
             flex: 7;
             height: 30px;
             line-height: 30px;
+            padding-left: 10px;
         }
         .input-div>.search-button{
             height: 30px;
@@ -53,21 +53,35 @@
         .search-result-ul{
             display: block;
             width: 100%;
-            height: 500px;
-            margin-top: 15px;
             list-style: none;
             overflow-y: auto;
             overflow-x: hidden;
         }
         .search-result-ul>li{
+            display: block;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
+        .search-result-ul>li:hover{
+            background: #aaaaaa !important;
+        }
+        .search-result-ul>li:nth-child(even){
+            background: #eeeaea;
+        }
+        .search-result-ul>li:nth-child(odd){
+            background: #faf8f8;
+        }
         .search-result-ul>li>span{
             display: inline-block;
             width: 20px;
-            padding-right: 10px;
+            padding: 0 8px 0 3px;
+            height: 40px;
+            line-height: 40px;
+        }
+        a:link,a:visited,a:hover,a:active{
+            color: #333333;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -75,7 +89,9 @@
     <div class="wrap" id="wrap">
         <!-- 搜索输入 -->
         <div class="input-div" id="input-div">
-            <input class="input-text" type="text" :placeholder="input_placeholder" name="search" id="search-text" autofocus v-model="input_value">
+            <input class="input-text" type="text" :placeholder="input_placeholder" name="search" id="search-text"
+                   @keypress.enter="clickBtn"
+                   autofocus v-model="input_value">
             <a class="search-button" value="search" id="search-reset-btn" @click="clickBtn"> {{ btn_value }} </a>
         </div>
         <!-- 搜索结果 -->
