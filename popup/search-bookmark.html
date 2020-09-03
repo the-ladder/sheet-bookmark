@@ -40,7 +40,7 @@
             line-height: 30px;
             padding-left: 10px;
         }
-        .input-div>.search-button{
+        .input-div>.button{
             height: 30px;
             line-height: 30px;
             display: block;
@@ -49,6 +49,10 @@
             flex: 3;
             cursor: pointer;
         }
+        .input-div>.reset-button{
+            color: #aaaaaa;
+            background-color: #333;
+        }
         /* 显示区域 */
         .search-result-ul{
             display: block;
@@ -56,12 +60,13 @@
             list-style: none;
             overflow-y: auto;
             overflow-x: hidden;
+            max-height: 300px;
         }
         .search-result-ul>li{
-            display: block;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            display: flex;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
         }
         .search-result-ul>li:hover{
             background: #aaaaaa !important;
@@ -72,16 +77,39 @@
         .search-result-ul>li:nth-child(odd){
             background: #faf8f8;
         }
+        .search-result-ul>li:first-child{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .search-result-ul>li:last-child{
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
         .search-result-ul>li>span{
-            display: inline-block;
-            width: 20px;
+            display: block;
             padding: 0 8px 0 3px;
-            height: 40px;
-            line-height: 40px;
+        }
+        .search-result-ul>li>a{
+            display: block;
+            width: 80%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
         a:link,a:visited,a:hover,a:active{
             color: #333333;
             text-decoration: none;
+        }
+        .page_selector{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+        }
+        .page_selector>a,.page_selector>span{
+            display: block;
+            text-align: center;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -92,17 +120,23 @@
             <input class="input-text" type="text" :placeholder="input_placeholder" name="search" id="search-text"
                    @keypress.enter="clickBtn"
                    autofocus v-model="input_value">
-            <a class="search-button" value="search" id="search-reset-btn" @click="clickBtn"> {{ btn_value }} </a>
+            <a class="button reset-button" value="reset" id="reset-btn" @click="clickResetBtn" v-if="search_result.length>0"> {{ btn_value_reset }} </a>
+            <a class="button" value="search" id="search-btn" @click="clickSearchBtn"> {{ btn_value_search }} </a>
         </div>
         <!-- 搜索结果 -->
         <ul class="search-result-ul">
-            <li v-for="(item,index) of search_result">
+            <li v-for="(item,index) of search_result"  v-if="index>=page_selected*10 && index<(page_selected+1)*10">
                 <span>{{index+1}}.</span>
                 <a :href="item.url" :title="item.title">
                      {{ item.title }}
                 </a>
             </li>
         </ul>
+        <div class="page_selector" v-if="search_result.length>0">
+            <a @click="page_selected-=1" :style="page_selected<1?'pointer-events:none;opacity:0;':''">上页</a> 
+            <span>{{1+page_selected*10}}~{{(page_selected+1)*10}} 共:{{search_result.length}}</span>
+            <a @click="page_selected+=1" :style="page_selected>=parseInt(search_result.length/10)?'pointer-events:none;opacity:0;':''">下页</a>
+        </div>
     </div>
 
     <script async src="../scripts/popup.js"></script>

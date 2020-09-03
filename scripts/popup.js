@@ -2,17 +2,19 @@
 new Vue({
     el: '#wrap',
     data:{
-        'btn_value': '搜索', // 搜索按钮文字
+        'btn_value_search': '搜索', // 搜索按钮文字
+        'btn_value_reset': '重置', // 重置按钮文字
         'input_value': '', // 搜索框输入值
-        'input_placeholder': '网址 | 书签名称 | 分类', // 搜索框placeholder值
+        'page_selected': 0, // 当前显示的页数
+        'input_placeholder': '网址 | 书签名称', // | 分类', // 搜索框placeholder值
         'bookmarkArr': [], // 所有书签
         'search_result': [], // 搜索结果
         'search_cache': {}, // 搜索缓存
         'search_history': [], // 搜索词历史
     },
     methods:{
-        // 点击按钮
-        async clickBtn(){
+        // 点击搜索按钮
+        async clickSearchBtn(){
             // 更改页面状态
             this.search_result = [];
 
@@ -24,6 +26,13 @@ new Vue({
                     o.url.includes(this.input_value)
                 ) this.search_result.push(o);
             }
+        },
+        // 点击重置按钮
+        async clickResetBtn(){
+            // 更改页面状态
+            this.search_result = [];
+            this.input_value = '';
+            this.page_selected = 0;
         },
         /**
          * 递归书签目录
@@ -55,7 +64,7 @@ new Vue({
             // 书签 根节点
             let rdata = this.bookmarkChildren(bookmarks,obj);
             for(let {dateAdded,id,index,parentId,title,type,url} of rdata) {
-                data.push({dateAdded, id, index, parentId, title, type, url})
+                data.push({dateAdded, id, index, parentId, title, type, url});
             }
             this.bookmarkArr = data;
 
