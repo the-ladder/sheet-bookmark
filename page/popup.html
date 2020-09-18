@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../scripts/vue.2.6.12.js"></script>
+    <title>search-bookmark</title>
+    <link rel="stylesheet" href="../style/popup.css">
+</head>
+<body>
+    <div class="wrap" id="wrap">
+        <!-- 搜索输入 -->
+        <div class="input-div" id="input-div">
+            <input class="input-text" type="text" :placeholder="input_placeholder" name="search" id="search-text"
+                   @keypress.enter="clickSearchBtn"
+                   autofocus v-model="input_value">
+            <a class="button reset-button" value="reset" id="reset-btn" @click="clickResetBtn" v-if="search_result.length>0"> {{ btn_value_reset }} </a>
+            <a class="button" value="search" id="search-btn" @click="clickSearchBtn"> {{ btn_value_search }} </a>
+        </div>
+        <!-- 搜索结果 -->
+        <ul class="search-result-ul">
+            <li v-for="(item,index) of search_result"  v-if="index>=page_selected*10 && index<(page_selected+1)*10">
+                <span>{{index+1}}.</span>
+                <a :href="item.url" :title="item.title">
+                     {{ item.title }}
+                </a>
+            </li>
+        </ul>
+        <div class="page_selector" v-if="search_result.length>0">
+            <a @click="page_selected-=1" :style="page_selected<1?'pointer-events:none;opacity:0;':''">上页</a> 
+            <span>{{1+page_selected*10}}~{{(page_selected+1)*10}} 共:{{search_result.length}}</span>
+            <a @click="page_selected+=1" :style="page_selected>=parseInt(search_result.length/10)?'pointer-events:none;opacity:0;':''">下页</a>
+        </div>
+    </div>
+
+    <script async src="../scripts/popup.js"></script>
+</body>
+</html>
+

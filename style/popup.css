@@ -1,0 +1,106 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all .3s;
+}
+html,body{
+    width: 350px;
+}
+.wrap{
+    display: flex;
+    align-content: center;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+    flex-wrap: wrap;
+}
+/* 输入框 + 搜索按钮 */
+.input-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+    border: 1px solid #333;
+    width: 100%;
+}
+.input-div>.input-text{
+    display: block;
+    width: 100%;
+    flex: 7;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.input-div>.button{
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    flex: 3;
+    cursor: pointer;
+}
+.input-div>.reset-button{
+    color: #aaaaaa;
+    background-color: #333;
+}
+/* 显示区域 */
+.search-result-ul{
+    display: block;
+    width: 100%;
+    list-style: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 300px;
+}
+.search-result-ul>li{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+.search-result-ul>li:hover{
+    background: #aaaaaa !important;
+}
+.search-result-ul>li:nth-child(even){
+    background: #eeeaea;
+}
+.search-result-ul>li:nth-child(odd){
+    background: #faf8f8;
+}
+.search-result-ul>li:first-child{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.search-result-ul>li:last-child{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.search-result-ul>li>span{
+    display: block;
+    padding: 0 8px 0 3px;
+}
+.search-result-ul>li>a{
+    display: block;
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+a:link,a:visited,a:hover,a:active{
+    color: #333333;
+    text-decoration: none;
+}
+.page_selector{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.page_selector>a,.page_selector>span{
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+}

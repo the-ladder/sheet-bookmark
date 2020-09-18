@@ -17,7 +17,7 @@
         "browser_style": true,
         "default_icon": "icons/s-bm.svg",
         "default_title": "sheet !",
-        "default_popup": "popup/search-bookmark.html"
+        "default_popup": "page/popup.html"
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 }
